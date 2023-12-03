@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ColorfullMessage } from "./components/ColorfullMessage";
 
 export const App = () => {
   console.log("App");
   const [num, setNum] = useState(0);
-  const [isShowFace, setIsShowFace] = useState(true);
+  const [isShowFace, setIsShowFace] = useState(false);
 
   const onClickCountUp = () => {
     setNum((prev) => prev + 1);
@@ -13,6 +13,17 @@ export const App = () => {
   const onClickToggle = () => {
     setIsShowFace(!isShowFace);
   };
+
+  useEffect(() => {
+    console.log("useEffect");
+    if (num > 0) {
+      if (num % 3 === 0) {
+        isShowFace || setIsShowFace(true);
+      } else {
+        isShowFace && setIsShowFace(false);
+      }
+    }
+  }, [num]);
 
   return (
     <div>
